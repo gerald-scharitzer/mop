@@ -16,11 +16,13 @@ What is the module search order?
 
 # Goals
 
-1. `mop install package` installs the `package` in the current directory.
+1. `mop install package` installs the `package` as package file `package.mojopkg` or `package.📦` in the current directory.
+Try `.mojopkg` first, because that is the [default extension](https://docs.modular.com/mojo/cli/package#-o-path).
 
 # Develop
 
-1. Run source with `mojo mop.mojo`
-2. Build with `mojo build mop.mojo`
-3. Run executable with `./mop`
-4. **TODO** Package with `mojo package`
+1. Run with `mojo main.mojo`
+2. Build with `mkdir -p target && mojo build -o target/mop main.mojo`
+3. Execute with `target/mop`
+4. Package with `mojo package -o target mop`
+5. Clean with `rm -r target`
