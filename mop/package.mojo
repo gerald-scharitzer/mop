@@ -4,6 +4,7 @@ struct Package:
 	fn __init__(inout self, name: String):
 		self.name = name
 	
-	fn install(self):
+	fn install(self) raises:
 		var file_name = self.name + ".mojopkg"
-		print("TODO write", file_name)
+		with open(file_name, "w") as file:
+			file.write("package " + self.name) # TODO write package content

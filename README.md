@@ -25,4 +25,5 @@ Try `.mojopkg` first, because that is the [default extension](https://docs.modul
 2. Build with `mkdir -p target && mojo build -o target/mop main.mojo`
 3. Execute with `target/mop`
 4. Package with `mojo package -o target mop`
-5. Clean with `rm -r target`
+5. **TODO** Document with `mojo doc`
+6. Clean with `rm -r target`
