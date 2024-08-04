@@ -21,9 +21,22 @@ Try `.mojopkg` first, because that is the [default extension](https://docs.modul
 
 # Develop
 
-1. Run with `mojo main.mojo`
-2. Build with `mkdir -p target && mojo build -o target/mop main.mojo`
-3. Execute with `target/mop`
-4. Package with `mojo package -o target mop`
-5. **TODO** Document with `mojo doc`
-6. Clean with `rm -r target`
+with [Git](https://git-scm.com/book),
+[Mojo](https://docs.modular.com/mojo/manual/), and
+[Python](https://docs.python.org/3/).
+
+1. Clone with `git clone https://github.com/gerald-scharitzer/mop.git`
+2. Enter with `cd mop`
+3. Install Python packages with `python -m pip install -r requirements.txt`
+4. Run with `mojo main.mojo`
+5. Build with `mkdir -p target && mojo build -o target/mop main.mojo`
+6. Execute with `target/mop`
+7. Package with `mojo package -o target mop`
+8. **TODO** Document with `mojo doc`
+9. Stage with `git add`
+10. Commit with `git commit -m "message"` where `message` describes the changes
+11. Push branch with `git push`
+12. Tag with `git tag version` where
+	`version` is the letter `v` followed by the [semantic version](https://semver.org/)
+13. Push tag with `git push origin tag` where `tag` is the version
+14. Clean with `rm -r target`
