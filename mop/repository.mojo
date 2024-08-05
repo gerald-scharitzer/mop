@@ -15,5 +15,7 @@ struct Repository:
 
     fn get_package(self, package: String) raises -> String:
         # TODO get package from repository
-        var request_module = Python.import_module("requests")
+        var requests = Python.import_module("requests")
+        var uri: String = self.host + self.user + "/" + package + "/tree/main/" + package # TODO change to tag
+        var response = requests.get(uri)
         return self.host + self.user + "/" + self.TAGS + "/" + package + ".tar.gz"
