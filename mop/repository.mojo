@@ -18,4 +18,11 @@ struct Repository:
         var requests = Python.import_module("requests")
         var uri: String = self.host + self.user + "/" + package + "/tree/main/" + package # TODO change to tag
         var response = requests.get(uri)
+        if response.status_code != requests.codes.OK: # FIXME internal error: PyObject_GetAttrString failed
+            raise Error("Get package: " + response.status_code)
+        
+        var content_type = response.headers["Content-Type"]
+        if content_type != "application/json":
+            raise Error("Get package content type: " + content_type)
+        
         return self.host + self.user + "/" + self.TAGS + "/" + package + ".tar.gz"
