@@ -1,5 +1,6 @@
-# 📦 Mojo Packages
-are imported from [directories or package files](https://docs.modular.com/mojo/manual/packages) in the file system.
+# 📦 Mojo Package Installer
+
+Mojo packages are imported from [directories or package files](https://docs.modular.com/mojo/manual/packages) in the file system.
 Installing a package stores it in the file system.
 
 **🧪 Experimental code 🚧 Under heavy construction**
