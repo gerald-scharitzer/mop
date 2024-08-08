@@ -3,7 +3,7 @@
 Mojo packages are imported from [directories or package files](https://docs.modular.com/mojo/manual/packages) in the file system.
 Installing a package stores it in the file system.
 
-**🧪 Experimental code 🚧 Under heavy construction**
+**⚠️ Warning 🧪 Experimental code 🚧 Under heavy construction**
 
 The standard library [`builtin` package](https://docs.modular.com/mojo/stdlib/builtin/) is imported automatically.
 The [other standard library packages](https://docs.modular.com/mojo/stdlib/algorithm/functional/)
