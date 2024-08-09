@@ -26,5 +26,4 @@ struct Package:
 	
 	fn install(self) raises:
 		var file_name = self.name + self.extension
-		with open(file_name, "w") as file:
-			file.write("package " + self.name) # TODO write package content
+		# TODO write package content via mojo instead of python

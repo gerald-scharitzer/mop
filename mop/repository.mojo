@@ -26,6 +26,15 @@ struct Repository:
         if content_type != "text/html; charset=utf-8": # FIXME change to packages and archives
             raise Error("Get package content type: " + content_type) # FIXME raising errors related to python objects seems to cause internal errors
         var content = response.content # TODO this is a Mojo PythonObject of a Python bytes-like object
-        # TODO Python way: write to package file via Python API
-        # TODO Mojo way: wrap this in an interator that returns Strings of at most the buffer size
+
+        var pathlib = Python.import_module("pathlib")
+        var path = pathlib.Path(package + ".mojopkg")
+        var package_file = path.open("wb")
+        try:
+            package_file.write(content)
+        except:
+            raise Error("Write package: " + package)
+        finally:
+            package_file.close()
+        # TODO Mojo way: wrap this in an iterator that returns Strings of at most the buffer size
         return self.host + self.user + "/" + self.TAGS + "/" + package + ".tar.gz"
