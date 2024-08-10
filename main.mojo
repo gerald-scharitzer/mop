@@ -3,7 +3,7 @@ from cli import run
 
 alias USAGE = """\
 Usage: mop install package
-	installs package into the current directory as .mopkg file
+	installs package into the current directory as .mojopkg file
 """
 
 fn main():

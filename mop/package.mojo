@@ -24,6 +24,10 @@ struct Package:
 		# TODO get package from repository
 		return self.name + self.extension
 	
+	fn get_filename(self) -> String:
+		"""Get the package filename including extension."""
+		return self.name + self.extension
+	
 	fn install(self) raises:
 		var file_name = self.name + self.extension
 		# TODO write package content via mojo instead of python

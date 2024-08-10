@@ -16,10 +16,34 @@ or directories specified as `-I` options for the commands
 
 What is the module search order?
 
+# GitHub
+
+Download the package from the latest release.
+Try `.mojopkg` first, because that is the [default extension](https://docs.modular.com/mojo/cli/package#-o-path).
+
+## Rationale
+
+Repository branches can be downloaded as `.zip` files via https://github.com/user/repo/archive/refs/heads/branch.zip where:
+
+- `user` is the user name
+- `repo` is the repository name
+- `branch` is the branch name
+
+Tags can be downloaded as `.zip` or `.tar.gz` files via https://github.com/user/repo/archive/refs/tags/tag.ext where:
+
+- `tag` is the Git tag
+- `ext` is `zip` or `tar.gz`
+
+There is no label for the latest tag.
+
+Releases can be downloaded just like tags and https://github.com/user/repo/releases/latest results in a redirect (HTTP 302 Found) to https://github.com/user/repo/releases/tag/release where `release` is the latest tag/release.
+
+There is no web user interface (WUI) to download a subdirectory of a repository.
+Repository files can be downloaded, but Mojo package files are output artifacts and thus not stored in Git repositories.
+
 # 🎯 Goals
 
-1. `mop install package` installs the `package` as package file `package.mojopkg` or `package.📦` in the current directory.
-Try `.mojopkg` first, because that is the [default extension](https://docs.modular.com/mojo/cli/package#-o-path).
+1. `mop install package` installs the `package` from a GitHub release as package file `package.mojopkg` or `package.📦` in the current directory.
 
 # 🪛 Develop
 
