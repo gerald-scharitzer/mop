@@ -21,6 +21,18 @@ What is the module search order?
 Download the package from the latest release.
 Try `.mojopkg` first, because that is the [default extension](https://docs.modular.com/mojo/cli/package#-o-path).
 
+Publish a package by attaching the package file to a release.
+
+1. Tag the branch with the package version.
+2. Create a release from the tag and attach the package file.
+
+Download the package from https://github.com/user/repo/releases/download/version/package.mojopkg where:
+
+- `user` is the user name
+- `repo` is the repository name and by default this is the package name
+- `version` is the package version
+- `package` is the package name
+
 ## Rationale
 
 Repository branches can be downloaded as `.zip` files via https://github.com/user/repo/archive/refs/heads/branch.zip where:

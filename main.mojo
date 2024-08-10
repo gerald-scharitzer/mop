@@ -15,4 +15,5 @@ fn main():
 		var content = repository.get_package(package.name)
 		package.install()
 	except e:
+		# TODO set exit code
 		print(e)

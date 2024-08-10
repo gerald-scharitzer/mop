@@ -5,41 +5,54 @@ from python import Python, PythonObject
 from .package import Package
 
 struct Repository:
-    var host: String
-    alias HOST_GITHUB = "https://github.com/"
-    var user: String
-    alias USER_DEFAULT = "gerald-scharitzer"
-    alias TAGS = "archive/refs/tags"
+	var host: String
+	alias HOST_GITHUB = "https://github.com/"
+	var user: String
+	alias USER_DEFAULT = "gerald-scharitzer"
+	alias TAGS = "archive/refs/tags"
+	alias DOWNLOAD = "/releases/download/"
 
-    fn __init__(inout self):
-        self.host = self.HOST_GITHUB
-        self.user = self.USER_DEFAULT
+	fn __init__(inout self):
+		self.host = self.HOST_GITHUB
+		self.user = self.USER_DEFAULT
 
-    fn get_package(self, package_name: String) raises -> String:
-        """Get the package content."""
+	fn get_package(self, package_name: String) raises -> String:
+		"""Get the package content.
+		
+		Download the package from https://github.com/user/repo/releases/download/version/package.mojopkg where:
+		
+		- `user` is the user name
+		- `repo` is the repository name and by default this is the package name
+		- `version` is the package version
+		- `package` is the package name
+		"""
 
-        var package = Package(package_name)
-        var requests = Python.import_module("requests")
-        var uri: String = self.host + self.user + "/" + package_name + "/tree/main/" + package_name # TODO change to tag
-        var response = requests.get(uri)
-        if response.status_code != requests.codes.OK:
-            raise Error("Get package: " + response.status_code)
-        
-        var content_type = response.headers["content-type"]
-        print(content_type) # FIXME remove
-        if content_type != "text/html; charset=utf-8": # FIXME change to packages and archives
-            raise Error("Get package content type: " + content_type) # FIXME raising errors related to python objects seems to cause internal errors
-        var content = response.content # TODO this is a Mojo PythonObject of a Python bytes-like object
+		var package = Package(package_name)
+		var filename = package.get_filename()
+		var requests = Python.import_module("requests")
+		var version = "v0.0-dev1" # FIXME get the latest version
+		var uri: String = self.host + self.user + "/" + package_name + self.DOWNLOAD + version + "/" + filename
+		var response = requests.get(uri)
+		if response.status_code != requests.codes.OK:
+			var status = int(response.status_code)
+			var http_status = "HTTP " + str(status)
+			if status == 404: # TODO constant
+				raise Error("Package " + package_name + " not found at " + uri + ": " + http_status)
+			raise Error("Get package: " + http_status)
+		
+		var content_type = str(response.headers["content-type"])
+		if content_type != "application/octet-stream": # FIXME change to packages and archives
+			raise Error("Get package content type: " + content_type) # FIXME raising errors related to python objects seems to cause internal errors
+		var content = response.content # TODO this is a Mojo PythonObject of a Python bytes-like object
 
-        var pathlib = Python.import_module("pathlib")
-        var filename = package.get_filename()
-        var path = pathlib.Path(filename)
-        var package_file = path.open("wb")
-        try:
-            package_file.write(content)
-        except:
-            raise Error("Write package: " + package_name)
-        finally:
-            package_file.close()
-        # TODO Mojo way: wrap this in an iterator that returns Strings of at most the buffer size
-        return self.host + self.user + "/" + self.TAGS + "/" + package_name + ".tar.gz"
+		var pathlib = Python.import_module("pathlib")
+		var path = pathlib.Path(filename)
+		var package_file = path.open("wb")
+		try:
+			package_file.write(content)
+		except:
+			raise Error("Write package: " + package_name)
+		finally:
+			package_file.close()
+		# TODO Mojo way: wrap this in an iterator that returns Strings of at most the buffer size
+		return self.host + self.user + "/" + self.TAGS + "/" + package_name + ".tar.gz"
