@@ -71,10 +71,11 @@ with [Git](https://git-scm.com/book),
 6. Execute with `target/mop`
 7. Package with `mojo package -o target mop`
 8. **TODO** Document with `mojo doc`
-9. Stage with `git add`
-10. Commit with `git commit -m "message"` where `message` describes the changes
-11. Push branch with `git push`
-12. Tag with `git tag version` where
+9. Sync `VERSION` in [`mop/__init__.mojo`](mop/__init__.mojo)
+10. Stage with `git add`
+11. Commit with `git commit -m "message"` where `message` describes the changes
+12. Push branch with `git push`
+13. Tag with `git tag version` where
 	`version` is the letter `v` followed by the [semantic version](https://semver.org/)
-13. Push tag with `git push origin tag` where `tag` is the version
-14. Clean with `rm -r target`
+14. Push tag with `git push origin tag` where `tag` is the version
+15. Clean with `rm -r target`
