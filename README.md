@@ -57,6 +57,11 @@ Repository files can be downloaded, but Mojo package files are output artifacts 
 
 `mop install package` installs the `package` from a GitHub release as package file `package.mojopkg` or `package.📦` in the current directory.
 
+## Issues
+
+If there is only one pre-release, then https://github.com/user/repo/releases/latest redirects to https://github.com/user/repo/releases.
+Check what happens with two pre-releases.
+
 ## Todo
 
 - dev scripts

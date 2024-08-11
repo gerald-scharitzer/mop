@@ -10,7 +10,9 @@ struct Repository:
 	var user: String
 	alias USER_DEFAULT = "gerald-scharitzer"
 	alias TAGS = "archive/refs/tags"
-	alias DOWNLOAD = "/releases/download/"
+	alias RELEASES = "/releases/"
+	alias DOWNLOAD = "download/"
+	alias LATEST = "latest"
 
 	fn __init__(inout self):
 		self.host = self.HOST_GITHUB
@@ -19,6 +21,7 @@ struct Repository:
 	fn get_package(self, package_name: String) raises -> String:
 		"""Get the package content.
 		
+		Get latest release from https://github.com/user/repo/releases/latest.
 		Download the package from https://github.com/user/repo/releases/download/version/package.mojopkg where:
 		
 		- `user` is the user name
@@ -31,8 +34,14 @@ struct Repository:
 		var filename = package.get_filename()
 		var requests = Python.import_module("requests")
 		var version = "v0.0-dev1" # FIXME get the latest version
-		var uri: String = self.host + self.user + "/" + package_name + self.DOWNLOAD + version + "/" + filename
+		var uri: String = self.host + self.user + "/" + package_name + self.RELEASES + self.DOWNLOAD + version + "/" + filename # TODO with version
+		uri = self.host + self.user + "/" + package_name + self.RELEASES + self.LATEST
+
 		var response = requests.get(uri)
+		if response.status_code == requests.codes.found:
+			uri = str(response.headers["location"]) # TODO check location before using it
+			response = requests.get(uri)
+		
 		if response.status_code != requests.codes.OK:
 			var status = int(response.status_code)
 			var http_status = "HTTP " + str(status)

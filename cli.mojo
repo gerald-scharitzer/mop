@@ -1,5 +1,3 @@
-from sys import argv
-
 from mop import Package, Repository, VERSION
 
 alias USAGE = """\
@@ -17,12 +15,11 @@ alias EXIT_SUCCESS = 0
 alias EXIT_FAILURE = 1
 alias EXIT_INFO = 2
 
-fn run() raises -> Int:
+fn run(args: VariadicList[StringRef]) raises -> Int:
 	alias ARG_STATE_COMMAND = 0
 	alias ARG_STATE_NEW = 1
 	alias ARG_STATE_INSTALL = 2
 
-	var args = argv()
 	if len(args) < 2:
 		print_usage()
 		return EXIT_INFO

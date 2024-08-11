@@ -1,11 +1,12 @@
-from sys import exit
+from sys import argv, exit
 
 from cli import EXIT_FAILURE, EXIT_SUCCESS, run
 
 fn main() -> None:
+	var args = argv()
 	var exit_code = EXIT_SUCCESS
 	try:
-		exit_code = run()
+		exit_code = run(args)
 	except e:
 		exit_code = EXIT_FAILURE
 		print(e)
