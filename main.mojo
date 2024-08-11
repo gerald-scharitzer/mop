@@ -1,13 +1,13 @@
-from mop import Package, Repository
-from cli import run
+from sys import exit
 
-fn main():
-	var package = Package("mopy") # TODO move to test
-	var repository = Repository()
+from cli import EXIT_FAILURE, EXIT_SUCCESS, run
+
+fn main() -> None:
+	var exit_code = EXIT_SUCCESS
 	try:
-		run()
-		var content = repository.get_package(package.name)
-		package.install()
+		exit_code = run()
 	except e:
-		# TODO set exit code
+		exit_code = EXIT_FAILURE
 		print(e)
+	if exit_code != EXIT_SUCCESS:
+		exit(exit_code)

@@ -1,6 +1,6 @@
 from sys import argv
 
-from mop import VERSION
+from mop import Package, Repository, VERSION
 
 alias USAGE = """\
 Usage: mop [arguments]
@@ -13,7 +13,11 @@ Arguments:
 		prints the version of this package
 """
 
-fn run() raises:
+alias EXIT_SUCCESS = 0
+alias EXIT_FAILURE = 1
+alias EXIT_INFO = 2
+
+fn run() raises -> Int:
 	alias ARG_STATE_COMMAND = 0
 	alias ARG_STATE_NEW = 1
 	alias ARG_STATE_INSTALL = 2
@@ -21,7 +25,7 @@ fn run() raises:
 	var args = argv()
 	if len(args) < 2:
 		print_usage()
-		return
+		return EXIT_INFO
 	
 	var argx = 0
 	var arg_state = ARG_STATE_COMMAND
@@ -36,10 +40,15 @@ fn run() raises:
 				arg_state = ARG_STATE_NEW
 			else:
 				print_usage()
-				return
+				return EXIT_FAILURE
 		elif arg_state == ARG_STATE_INSTALL:
 			var package_name = arg
-			print("installing package " + str(package_name)) # TODO install package
+			var package = Package(package_name)
+			var repository = Repository()
+			try:
+				var content = repository.get_package(package.name) # FIXME return value
+			except e:
+				raise Error("failed to get package " + str(package_name) + ": " + str(e))
 			arg_state = ARG_STATE_NEW
 		else:
 			raise Error("invalid argument state " + str(arg_state) + " at index " + str(argx))
@@ -47,7 +56,9 @@ fn run() raises:
 
 	if arg_state != ARG_STATE_NEW: # last argument not complete
 		print_usage()
-		return
+		return EXIT_FAILURE
+	
+	return EXIT_SUCCESS
 
 fn print_usage():
 	print(USAGE, end="")

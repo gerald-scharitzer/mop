@@ -55,7 +55,15 @@ Repository files can be downloaded, but Mojo package files are output artifacts 
 
 # 🎯 Goals
 
-1. `mop install package` installs the `package` from a GitHub release as package file `package.mojopkg` or `package.📦` in the current directory.
+`mop install package` installs the `package` from a GitHub release as package file `package.mojopkg` or `package.📦` in the current directory.
+
+## Todo
+
+- dev scripts
+- unit tests
+- integration tests
+- generate documentation
+- review license
 
 # 🪛 Develop
 
