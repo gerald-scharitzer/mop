@@ -9,6 +9,7 @@ struct Repository:
 	alias HOST_GITHUB = "https://github.com/"
 	var user: String
 	alias USER_DEFAULT = "gerald-scharitzer"
+	alias TAG = "tag/"
 	alias TAGS = "archive/refs/tags"
 	alias RELEASES = "/releases/"
 	alias DOWNLOAD = "download/"
@@ -37,9 +38,15 @@ struct Repository:
 		var uri: String = self.host + self.user + "/" + package_name + self.RELEASES + self.DOWNLOAD + version + "/" + filename # TODO with version
 		uri = self.host + self.user + "/" + package_name + self.RELEASES + self.LATEST
 
-		var response = requests.get(uri)
+		var response = requests.get(uri, allow_redirects = False) # do not follow redirects to get the location instead of the html page
 		if response.status_code == requests.codes.found:
 			uri = str(response.headers["location"]) # TODO check location before using it
+			var prefix = self.host + self.user + "/" + package_name + self.RELEASES + self.TAG
+			if uri.startswith(prefix):
+				var version = uri[len(prefix):]
+				uri = self.host + self.user + "/" + package_name + self.RELEASES + self.DOWNLOAD + version + "/" + filename
+			else:
+				raise Error("Get package location: " + uri)
 			response = requests.get(uri)
 		
 		if response.status_code != requests.codes.OK:

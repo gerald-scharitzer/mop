@@ -50,17 +50,15 @@ There is no label for the latest tag.
 
 Releases can be downloaded just like tags and https://github.com/user/repo/releases/latest results in a redirect (HTTP 302 Found) to https://github.com/user/repo/releases/tag/release where `release` is the latest tag/release.
 
+If there are only pre-releases, then https://github.com/user/repo/releases/latest redirects to https://github.com/user/repo/releases.
+Publish a release that is not a pre-release to enable finding the latest release.
+
 There is no web user interface (WUI) to download a subdirectory of a repository.
 Repository files can be downloaded, but Mojo package files are output artifacts and thus not stored in Git repositories.
 
 # 🎯 Goals
 
 `mop install package` installs the `package` from a GitHub release as package file `package.mojopkg` or `package.📦` in the current directory.
-
-## Issues
-
-If there is only one pre-release, then https://github.com/user/repo/releases/latest redirects to https://github.com/user/repo/releases.
-Check what happens with two pre-releases.
 
 ## Todo
 
