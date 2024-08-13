@@ -65,6 +65,7 @@ Repository files can be downloaded, but Mojo package files are output artifacts 
 - dev scripts
 - unit tests
 - integration tests
+- doc tests
 - generate documentation
 - review license
 
@@ -77,16 +78,21 @@ with [Git](https://git-scm.com/book),
 1. Clone with `git clone https://github.com/gerald-scharitzer/mop.git`
 2. Enter with `cd mop`
 3. Install Python packages with `python -m pip install -r requirements.txt`
-4. Run with `mojo main.mojo`
-5. Build with `mkdir -p target && mojo build -o target/mop main.mojo`
-6. Execute with `target/mop`
-7. Package with `mojo package -o target mop`
-8. **TODO** Document with `mojo doc`
-9. Sync `VERSION` in [`mop/__init__.mojo`](mop/__init__.mojo)
-10. Stage with `git add`
-11. Commit with `git commit -m "message"` where `message` describes the changes
-12. Push branch with `git push`
-13. Tag with `git tag version` where
+4. Test with `mojo test`
+5. Run with `mojo main.mojo`
+6. Build with `mkdir -p target && mojo build -o target/mop main.mojo`
+7. Execute with `target/mop`
+8. Package with `mojo package -o target mop`
+9. **TODO** Document with `mojo doc`
+10. Sync `VERSION` in [`mop/__init__.mojo`](mop/__init__.mojo)
+11. Stage with `git add`
+12. Commit with `git commit -m "message"` where `message` describes the changes
+13. Push branch with `git push`
+14. Tag with `git tag version` where
 	`version` is the letter `v` followed by the [semantic version](https://semver.org/)
-14. Push tag with `git push origin tag` where `tag` is the version
-15. Clean with `rm -r target`
+15. Push tag with `git push origin tag` where `tag` is the version
+16. Clean with `rm -r target`
+
+## Issues
+
+Code diagnostics cannot resolve imports from nested tests.
