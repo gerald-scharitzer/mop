@@ -1,3 +1,5 @@
+from .repository import Repository
+
 struct Package:
 	"""A Mojo package has a name.
 
@@ -30,4 +32,6 @@ struct Package:
 	
 	fn install(self) raises:
 		var file_name = self.name + self.extension
+		var repository = Repository()
+		repository.get_package(self.name) # write the package content to the current directory
 		# TODO write package content via mojo instead of python

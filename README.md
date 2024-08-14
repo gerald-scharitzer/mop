@@ -84,7 +84,7 @@ with [Git](https://git-scm.com/book),
 7. Execute with `target/mop`
 8. Package with `mojo package -o target mop`
 9. **TODO** Document with `mojo doc`
-10. Sync `VERSION` in [`mop/__init__.mojo`](mop/__init__.mojo)
+10. Sync `VERSION` in [`mop/__init__.mojo`](mop/__init__.mojo) and [`test_mop.mojo`](test_mop.mojo)
 11. Stage with `git add`
 12. Commit with `git commit -m "message"` where `message` describes the changes
 13. Push branch with `git push`
