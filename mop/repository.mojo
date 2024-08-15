@@ -20,7 +20,7 @@ struct Repository:
 		self.user = self.USER_DEFAULT
 
 	fn get_package(self, package_name: String) raises -> String:
-		"""Get the package content.
+		"""Get the package content from the default repository and install the package into the current directory.
 		
 		Get latest release from https://github.com/user/repo/releases/latest.
 		Download the package from https://github.com/user/repo/releases/download/version/package.mojopkg where:
@@ -29,12 +29,15 @@ struct Repository:
 		- `repo` is the repository name and by default this is the package name
 		- `version` is the package version
 		- `package` is the package name
+
+		Returns:
+			The fully qualfied URI of the package.
 		"""
 
 		var package = Package(package_name)
 		var filename = package.get_filename()
 		var requests = Python.import_module("requests")
-		var version = "v0.0-dev1" # FIXME get the latest version
+		var version = "latest" # TODO get specific version
 		var uri: String = self.host + self.user + "/" + package_name + self.RELEASES + self.DOWNLOAD + version + "/" + filename # TODO with version
 		uri = self.host + self.user + "/" + package_name + self.RELEASES + self.LATEST
 
@@ -57,7 +60,7 @@ struct Repository:
 			raise Error("Get package: " + http_status)
 		
 		var content_type = str(response.headers["content-type"])
-		if content_type != "application/octet-stream": # FIXME change to packages and archives
+		if content_type != "application/octet-stream":
 			raise Error("Get package content type: " + content_type) # FIXME raising errors related to python objects seems to cause internal errors
 		var content = response.content # TODO this is a Mojo PythonObject of a Python bytes-like object
 
@@ -71,4 +74,4 @@ struct Repository:
 		finally:
 			package_file.close()
 		# TODO Mojo way: wrap this in an iterator that returns Strings of at most the buffer size
-		return self.host + self.user + "/" + self.TAGS + "/" + package_name + ".tar.gz"
+		return uri

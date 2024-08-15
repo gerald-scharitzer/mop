@@ -1,3 +1,7 @@
+"""mop - Mojo Package Installer
+
+See usage in [cli.mojo](cli.mojo).
+"""
 from sys import argv, exit
 
 from cli import EXIT_FAILURE, EXIT_SUCCESS, run
