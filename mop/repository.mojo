@@ -30,24 +30,40 @@ struct Repository:
 		- `version` is the package version
 		- `package` is the package name
 
+		Args:
+			package_name: The name of the package in the format `user/package`.
+		
 		Returns:
 			The fully qualfied URI of the package.
 		"""
 
-		var package = Package(package_name)
+		var parts = package_name.split("/", 1)
+		var part_count = len(parts)
+		var user: String
+		var shortname: String
+		if part_count == 1:
+			user = self.user
+			shortname = parts[0]
+		elif part_count == 2:
+			user = parts[0]
+			shortname = parts[1]
+		else:
+			raise Error("Invalid package name: " + package_name)
+		
+		var package = Package(shortname)
 		var filename = package.get_filename()
 		var requests = Python.import_module("requests")
 		var version = "latest" # TODO get specific version
-		var uri: String = self.host + self.user + "/" + package_name + self.RELEASES + self.DOWNLOAD + version + "/" + filename # TODO with version
-		uri = self.host + self.user + "/" + package_name + self.RELEASES + self.LATEST
+		var uri: String = self.host + user + "/" + shortname + self.RELEASES + self.DOWNLOAD + version + "/" + filename # TODO with version
+		uri = self.host + user + "/" + shortname + self.RELEASES + self.LATEST
 
 		var response = requests.get(uri, allow_redirects = False) # do not follow redirects to get the location instead of the html page
 		if response.status_code == requests.codes.found:
 			uri = str(response.headers["location"]) # TODO check location before using it
-			var prefix = self.host + self.user + "/" + package_name + self.RELEASES + self.TAG
+			var prefix = self.host + user + "/" + shortname + self.RELEASES + self.TAG
 			if uri.startswith(prefix):
 				var version = uri[len(prefix):]
-				uri = self.host + self.user + "/" + package_name + self.RELEASES + self.DOWNLOAD + version + "/" + filename
+				uri = self.host + user + "/" + shortname + self.RELEASES + self.DOWNLOAD + version + "/" + filename
 			else:
 				raise Error("Get package location: " + uri)
 			response = requests.get(uri)
@@ -70,7 +86,7 @@ struct Repository:
 		try:
 			package_file.write(content)
 		except:
-			raise Error("Write package: " + package_name)
+			raise Error("Write package: " + shortname)
 		finally:
 			package_file.close()
 		# TODO Mojo way: wrap this in an iterator that returns Strings of at most the buffer size

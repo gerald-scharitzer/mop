@@ -3,7 +3,14 @@
 Mojo packages are imported from [directories or package files](https://docs.modular.com/mojo/manual/packages) in the file system.
 Installing a package stores it in the file system.
 
-**⚠️ Warning 🧪 Experimental code 🚧 Under heavy construction**
+**⚠️ Warning 🧪 Experimental Code 🚧 Under Heavy Construction**
+
+# 🔌 Use
+
+`mop install user/package` installs the `package` from the latest release of the GitHub repository `package` of the `user`
+as package file `package.mojopkg` or `package.📦` in the current directory.
+
+# 💡 Rationale
 
 The standard library [`builtin` package](https://docs.modular.com/mojo/stdlib/builtin/) is imported automatically.
 The [other standard library packages](https://docs.modular.com/mojo/stdlib/algorithm/functional/)
@@ -16,7 +23,7 @@ or directories specified as `-I` options for the commands
 
 What is the module search order?
 
-# GitHub
+## GitHub
 
 Download the package from the latest release.
 Try `.mojopkg` first, because that is the [default extension](https://docs.modular.com/mojo/cli/package#-o-path).
@@ -32,8 +39,6 @@ Download the package from https://github.com/user/repo/releases/download/version
 - `repo` is the repository name and by default this is the package name
 - `version` is the package version
 - `package` is the package name
-
-## Rationale
 
 Repository branches can be downloaded as `.zip` files via https://github.com/user/repo/archive/refs/heads/branch.zip where:
 
@@ -56,19 +61,6 @@ Publish a release that is not a pre-release to enable finding the latest release
 There is no web user interface (WUI) to download a subdirectory of a repository.
 Repository files can be downloaded, but Mojo package files are output artifacts and thus not stored in Git repositories.
 
-# 🎯 Goals
-
-`mop install package` installs the `package` from a GitHub release as package file `package.mojopkg` or `package.📦` in the current directory.
-
-## Todo
-
-- dev scripts
-- unit tests
-- integration tests
-- doc tests
-- generate documentation
-- review license
-
 # 🪛 Develop
 
 with [Git](https://git-scm.com/book),
@@ -83,7 +75,7 @@ with [Git](https://git-scm.com/book),
 6. Build with `mkdir -p target && mojo build -o target/mop main.mojo`
 7. Execute with `target/mop`
 8. Package with `mojo package -o target mop`
-9. **TODO** Document with `mojo doc`
+9. Document with `mojo doc -o target/mop-doc.json mop`
 10. Sync `VERSION` in [`mop/__init__.mojo`](mop/__init__.mojo) and [`test_mop.mojo`](test_mop.mojo)
 11. Stage with `git add`
 12. Commit with `git commit -m "message"` where `message` describes the changes
@@ -96,3 +88,15 @@ with [Git](https://git-scm.com/book),
 ## Issues
 
 Code diagnostics cannot resolve imports from nested tests.
+
+# 📋 Backlog
+
+Release and put download link in "Use" section.
+
+`mojo doc` all source files, when it can generate something more human-readable than JSON.
+
+- dev scripts
+- unit tests
+- integration tests
+- doc tests
+- review license
