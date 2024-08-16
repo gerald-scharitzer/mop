@@ -81,8 +81,7 @@ with [Git](https://git-scm.com/book),
 12. Stage with `git add`
 13. Commit with `git commit -m "message"` where `message` describes the changes
 14. Push branch with `git push`
-15. Tag with `git tag version` where
-	`version` is the letter `v` followed by the [semantic version](https://semver.org/)
+15. Tag with `git tag version` where `version` is the [semantic version](https://semver.org/)
 16. Push tag with `git push origin tag` where `tag` is the version
 17. Clean with `rm -r target`
 
