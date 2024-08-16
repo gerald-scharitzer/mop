@@ -7,8 +7,8 @@ Installing a package stores it in the file system.
 
 # 🔌 Use
 
-`mop install user/package` installs the `package` from the latest release of the GitHub repository `package` of the `user`
-as package file `package.mojopkg` or `package.📦` in the current directory.
+`mop install <user>/<package>` installs the `<package>` from the latest release of the GitHub repository `<package>` of the `<user>`
+as package file `<package>.mojopkg` or `<package>.📦` in the current directory.
 
 # 💡 Rationale
 
@@ -77,13 +77,14 @@ with [Git](https://git-scm.com/book),
 8. Package with `mojo package -o target mop`
 9. Document with `mojo doc -o target/mop-doc.json mop`
 10. Sync `VERSION` in [`mop/__init__.mojo`](mop/__init__.mojo) and [`test_mop.mojo`](test_mop.mojo)
-11. Stage with `git add`
-12. Commit with `git commit -m "message"` where `message` describes the changes
-13. Push branch with `git push`
-14. Tag with `git tag version` where
+11. Sync `USAGE` in [`cli.mojo`](cli.mojo) and [`README.md` section "Use"](#-use)
+12. Stage with `git add`
+13. Commit with `git commit -m "message"` where `message` describes the changes
+14. Push branch with `git push`
+15. Tag with `git tag version` where
 	`version` is the letter `v` followed by the [semantic version](https://semver.org/)
-15. Push tag with `git push origin tag` where `tag` is the version
-16. Clean with `rm -r target`
+16. Push tag with `git push origin tag` where `tag` is the version
+17. Clean with `rm -r target`
 
 ## Issues
 

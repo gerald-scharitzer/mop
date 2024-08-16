@@ -4,8 +4,9 @@ alias USAGE = """\
 Usage: mop [arguments]
 Arguments:
 
-	i | install package
-		installs package into the current directory as .mojopkg file
+	i | install <user>/<package>
+		installs <package> from the GitHub repository of <user>
+		into the current directory as .mojopkg file
 	
 	v | version
 		prints the version of this package
