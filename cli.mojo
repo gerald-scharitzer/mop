@@ -4,12 +4,13 @@ alias USAGE = """\
 Usage: mop [arguments]
 Arguments:
 
-	i | install <user>/<package>
-		installs <package> from the GitHub repository of <user>
-		into the current directory as .mojopkg file
+	i | install <user>/<package>[==<version>]
+		Installs <package> from the GitHub repository of <user>
+		into the current directory as .mojopkg file.
+		If <version> is not specified, then the latest version is installed.
 	
 	v | version
-		prints the version of this package
+		Prints the version of this package.
 """
 
 alias EXIT_SUCCESS = 0

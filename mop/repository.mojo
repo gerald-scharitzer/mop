@@ -14,6 +14,7 @@ struct Repository:
 	alias RELEASES = "/releases/"
 	alias DOWNLOAD = "download/"
 	alias LATEST = "latest"
+	alias GITHUB_RELEASE = "https://objects.githubusercontent.com/github-production-release-asset-"
 
 	fn __init__(inout self):
 		self.host = self.HOST_GITHUB
@@ -37,35 +38,55 @@ struct Repository:
 			The fully qualfied URI of the package.
 		"""
 
-		var parts = package_name.split("/", 1)
+		var parts = package_name.split("/", 1) # split after user
 		var part_count = len(parts)
 		var user: String
 		var shortname: String
-		if part_count == 1:
+		if part_count == 1: # no user specified
 			user = self.user
 			shortname = parts[0]
 		elif part_count == 2:
 			user = parts[0]
 			shortname = parts[1]
 		else:
-			raise Error("Invalid package name: " + package_name)
+			raise Error("Invalid user in package name: " + package_name)
 		
+		parts = shortname.split("==", 1) # split after package name
+		part_count = len(parts)
+		var is_latest: Bool
+		var version: String
+		var uri: String
+		if part_count == 1: # no version specified
+			is_latest = True
+			version = self.LATEST
+		elif part_count == 2:
+			is_latest = False
+			shortname = parts[0]
+			version = parts[1]
+		else:
+			raise Error("Invalid version in package name: " + package_name)
+
 		var package = Package(shortname)
 		var filename = package.get_filename()
-		var requests = Python.import_module("requests")
-		var version = "latest" # TODO get specific version
-		var uri: String = self.host + user + "/" + shortname + self.RELEASES + self.DOWNLOAD + version + "/" + filename # TODO with version
-		uri = self.host + user + "/" + shortname + self.RELEASES + self.LATEST
+		if is_latest:
+			uri = self.host + user + "/" + shortname + self.RELEASES + self.LATEST
+		else:
+			uri = self.host + user + "/" + shortname + self.RELEASES + self.DOWNLOAD + version + "/" + filename
 
+		var requests = Python.import_module("requests")
 		var response = requests.get(uri, allow_redirects = False) # do not follow redirects to get the location instead of the html page
 		if response.status_code == requests.codes.found:
 			uri = str(response.headers["location"]) # TODO check location before using it
-			var prefix = self.host + user + "/" + shortname + self.RELEASES + self.TAG
-			if uri.startswith(prefix):
-				var version = uri[len(prefix):]
-				uri = self.host + user + "/" + shortname + self.RELEASES + self.DOWNLOAD + version + "/" + filename
+			if is_latest:
+				var prefix = self.host + user + "/" + shortname + self.RELEASES + self.TAG
+				if uri.startswith(prefix):
+					version = uri[len(prefix):]
+					uri = self.host + user + "/" + shortname + self.RELEASES + self.DOWNLOAD + version + "/" + filename
+				else:
+					raise Error("Get latest package location: " + uri)
 			else:
-				raise Error("Get package location: " + uri)
+				if not uri.startswith(self.GITHUB_RELEASE):
+					raise Error("Get release package location: " + uri)
 			response = requests.get(uri)
 		
 		if response.status_code != requests.codes.OK:

@@ -7,8 +7,9 @@ Installing a package stores it in the file system.
 
 # 🔌 Use
 
-`mop install <user>/<package>` installs the `<package>` from the latest release of the GitHub repository `<package>` of the `<user>`
+`mop install <user>/<package>[==<version>]` installs the `<package>` from the GitHub repository `<package>` of the `<user>`
 as package file `<package>.mojopkg` or `<package>.📦` in the current directory.
+If `<version>` is not specified, then the latest release is installed.
 
 # 💡 Rationale
 
