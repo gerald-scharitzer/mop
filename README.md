@@ -92,6 +92,8 @@ Code diagnostics cannot resolve imports from nested tests.
 
 # 📋 Backlog
 
+Test with https://github.com/saviorand/lightbug_http.
+
 Release and put download link in "Use" section.
 
 `mojo doc` all source files, when it can generate something more human-readable than JSON.
@@ -101,3 +103,9 @@ Release and put download link in "Use" section.
 - integration tests
 - doc tests
 - review license
+
+Support both filename extensions.
+
+# Scope
+
+Process packages independent from their containing file system structure.
