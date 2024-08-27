@@ -3,12 +3,14 @@ from testing import assert_equal, assert_true
 from mop import Package
 
 fn test_package() raises -> None:
+    var tests = List("gerald-scharitzer", "mopy", "")
     alias HOST = "https://github.com/"
     alias USER = "gerald-scharitzer"
     alias PACKAGE = "mopy"
     alias MOJOPKG = ".mojopkg"
-    var shortname = PACKAGE
-    var longname = USER + "/" + shortname
+    var user = str(tests[0])
+    var shortname = str(tests[1])
+    var longname = user + "/" + shortname
     var package = Package(shortname)
     var extension = MOJOPKG
     var filename = shortname + extension

@@ -9,7 +9,7 @@ Installing a package stores it in the file system.
 
 `mop install <user>/<package>[==<version>]` installs the `<package>` from the GitHub repository `<package>` of the `<user>`
 as package file `<package>.mojopkg` or `<package>.📦` in the current directory.
-If `<version>` is not specified, then the latest release is installed.
+If `==<version>` is specified, then the specified `<version>` is installed. Otherwise, the latest release is installed.
 
 # 💡 Rationale
 
@@ -93,6 +93,8 @@ Code diagnostics cannot resolve imports from nested tests.
 # 📋 Backlog
 
 Test with https://github.com/saviorand/lightbug_http.
+
+Find a better name.
 
 Release and put download link in "Use" section.
 

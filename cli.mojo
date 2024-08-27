@@ -1,4 +1,4 @@
-from mop import Package, VERSION
+from mop import Repository, VERSION
 
 alias USAGE = """\
 Usage: mop [arguments]
@@ -42,9 +42,9 @@ fn run(args: VariadicList[StringRef]) raises -> Int:
 				return EXIT_FAILURE
 		elif arg_state == ARG_STATE_INSTALL:
 			var package_name = arg
-			var package = Package(package_name)
+			var repository = Repository()
 			try:
-				var uri = package.install()
+				var uri = repository.get_package(package_name)
 				# TODO print URI based on log level
 			except e:
 				raise Error("failed to get package " + str(package_name) + ": " + str(e))
