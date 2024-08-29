@@ -7,13 +7,13 @@ fn test_package() raises -> None:
     alias HOST = "https://github.com/"
     alias USER = "gerald-scharitzer"
     alias PACKAGE = "mopy"
-    alias MOJOPKG = ".mojopkg"
+    alias MOJOPKG = "mojopkg"
     var user = str(tests[0])
     var shortname = str(tests[1])
     var longname = user + "/" + shortname
     var package = Package(shortname)
     var extension = MOJOPKG
-    var filename = shortname + extension
+    var filename = shortname + "." + extension
     assert_equal(package.name, shortname)
     assert_equal(package.extension, extension)
     assert_equal(package.get_filename(), filename)

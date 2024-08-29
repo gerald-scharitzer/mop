@@ -88,6 +88,8 @@ with [Git](https://git-scm.com/book),
 
 ## Issues
 
+Array of literals cannot be subscripted (runtime error).
+
 Code diagnostics cannot resolve imports from nested tests.
 
 # 📋 Backlog
