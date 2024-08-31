@@ -1,4 +1,4 @@
-from mop import Repository, VERSION
+from mop import health, Repository, VERSION
 
 alias USAGE = """\
 Usage: mop [arguments]
@@ -32,7 +32,14 @@ fn run(args: VariadicList[StringRef]) raises -> Int:
 		if arg_state == ARG_STATE_COMMAND: # do nothing with the command name
 			arg_state = ARG_STATE_NEW
 		elif arg_state == ARG_STATE_NEW: # new argument sequence
-			if arg == "i" or arg == "install":
+			if arg == "h" or arg == "health":
+				try:
+					health()
+				except e:
+					print(e)
+					return EXIT_FAILURE
+				arg_state = ARG_STATE_NEW
+			elif arg == "i" or arg == "install":
 				arg_state = ARG_STATE_INSTALL
 			elif arg == "v" or arg == "version":
 				print(VERSION)
