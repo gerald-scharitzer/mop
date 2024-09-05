@@ -72,13 +72,13 @@ with [Git](https://git-scm.com/book),
 2. Enter with `cd mop`
 3. Install Python packages with `python -m pip install -r requirements.txt`
 4. Test with `mojo test`
-5. Run with `mojo main.mojo`
-6. Build with `mkdir -p target && mojo build -o target/mop main.mojo`
+5. Run with `mojo src/main.mojo`
+6. Build with `mkdir -p target && mojo build -o target/mop src/main.mojo`
 7. Execute with `target/mop`
-8. Package with `mojo package -o target mop`
-9. Document with `mojo doc -o target/mop-doc.json mop`
-10. Sync `VERSION` in [`mop/__init__.mojo`](mop/__init__.mojo) and [`test_mop.mojo`](test_mop.mojo)
-11. Sync `USAGE` in [`cli.mojo`](cli.mojo) and [`README.md` section "Use"](#-use)
+8. Package with `mojo package -o target src/mop`
+9. Document with `mojo doc -o target/mop-doc.json src/mop`
+10. Sync `VERSION` in [`mop/__init__.mojo`](src/mop/__init__.mojo) and [`test_mop.mojo`](src/test_mop.mojo)
+11. Sync `USAGE` in [`cli.mojo`](src/cli.mojo) and [`README.md` section "Use"](#-use)
 12. Stage with `git add`
 13. Commit with `git commit -m "message"` where `message` describes the changes
 14. Push branch with `git push`
