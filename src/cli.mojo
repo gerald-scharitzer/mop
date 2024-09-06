@@ -4,6 +4,9 @@ alias USAGE = """\
 Usage: mop [arguments]
 Arguments:
 
+	h | health
+		Check fundamental assumptions like the encoding of ASCII digits and letters.
+	
 	i | install <user>/<package>[==<version>]
 		Installs <package> from the GitHub repository of <user>
 		into the current directory as .mojopkg file.
