@@ -54,7 +54,7 @@ fn run(args: VariadicList[StringRef]) raises -> Int:
 			var package_name = arg
 			var repository = Repository()
 			try:
-				var uri = repository.get_package(package_name)
+				_ = repository.get_package(package_name)
 				# TODO print URI based on log level
 			except e:
 				raise Error("failed to get package " + str(package_name) + ": " + str(e))
