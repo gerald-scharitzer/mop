@@ -10,7 +10,7 @@ Arguments:
 	i | install <user>/<package>[==<version>]
 		Installs <package> from the GitHub repository of <user>
 		into the current directory as .mojopkg file.
-		If <version> is not specified, then the latest version is installed.
+		If ==<version> is not specified, then the latest version is installed.
 	
 	v | version
 		Prints the version of this package.
