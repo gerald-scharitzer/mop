@@ -1,4 +1,4 @@
-from mop import health, Repository, VERSION
+from mop import health, Index, Repository, VERSION
 
 alias USAGE = """\
 Usage: mop [arguments]
@@ -58,6 +58,10 @@ fn run(args: VariadicList[StringRef]) raises -> Int:
 				# TODO print URI based on log level
 			except e:
 				raise Error("failed to get package " + str(package_name) + ": " + str(e))
+			
+			var index = Index()
+			index.add_link(package_name)
+			index.save()
 			arg_state = ARG_STATE_NEW
 		else:
 			raise Error("invalid argument state " + str(arg_state) + " at index " + str(argx))

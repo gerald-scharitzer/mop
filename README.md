@@ -106,9 +106,18 @@ are documented in the [release notes](releases.md).
 
 # 📋 Backlog
 
-Test with https://github.com/saviorand/lightbug_http.
-
 Find a better name.
+
+Store package source information in a file, such that the package can be obtained again and verified to be the same.
+- name
+- version
+- URL
+- cryptographic hash
+- install time
+
+See [SPDX](https://spdx.dev/) and [package URL](https://github.com/package-url/purl-spec).
+
+Test with https://github.com/saviorand/lightbug_http.
 
 `mojo doc` all source files, when it can generate something more human-readable than JSON.
 
