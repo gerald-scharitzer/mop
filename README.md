@@ -11,6 +11,20 @@ Installing a package stores it in the file system.
 as package file `<package>.mojopkg` or `<package>.📦` in the current directory.
 If `==<version>` is specified, then the specified `<version>` is installed. Otherwise, the latest release is installed.
 
+Just `mop` without arguments prints the usage.
+
+## Setup
+
+Pick a [release](https://github.com/gerald-scharitzer/mop/releases) and download it, or clone it from the Git repository.
+
+[Build](#-develop) the main module, because Mojo does not support main functions in packages yet.
+
+Check the version with `mop v`.
+
+## Example
+
+Install [Lightbug](https://github.com/saviorand/lightbug_http) with `mop i saviorand/lightbug_http`.
+
 # 💡 Rationale
 
 The standard library [`builtin` package](https://docs.modular.com/mojo/stdlib/builtin/) is imported automatically.
@@ -86,19 +100,15 @@ with [Git](https://git-scm.com/book),
 16. Push tag with `git push origin tag` where `tag` is the version
 17. Clean with `rm -r target`
 
-## Issues
+# ✨ Releases
 
-Array of literals cannot be subscripted (runtime error).
-
-Code diagnostics cannot resolve imports from nested tests.
+are documented in the [release notes](releases.md).
 
 # 📋 Backlog
 
 Test with https://github.com/saviorand/lightbug_http.
 
 Find a better name.
-
-Release and put download link in "Use" section.
 
 `mojo doc` all source files, when it can generate something more human-readable than JSON.
 
@@ -110,6 +120,12 @@ Release and put download link in "Use" section.
 
 Support both filename extensions.
 
-# Scope
+## Issues
+
+Array of literals cannot be subscripted (runtime error).
+
+Code diagnostics cannot resolve imports from nested tests.
+
+## Scope
 
 Process packages independent from their containing file system structure.

@@ -1,3 +1,3 @@
-# Release 0.1 Install
+# Release 0.1.0 Install
 
-Download latest or specific version of a released Mojo package.
+Download latest or specific version of a Mojo package released on GitHub.

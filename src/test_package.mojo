@@ -27,7 +27,7 @@ fn test_package() raises -> None:
 				package_test(user, shortname, extension, expected_extension)
 
 fn package_test(user: String, shortname: String, extension: String, expected_extension: String) raises -> None:
-	var longname = user + "/" + shortname
+	_ = user + "/" + shortname # TODO test URL
 	var package: Package
 	if len(extension) == 0:
 		package = Package(shortname)
