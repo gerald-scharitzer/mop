@@ -1,7 +1,9 @@
-# 📦 Mojo Package Installer
+# 📦 Mojo Package Manager
 
-Mojo packages are imported from [directories or package files](https://docs.modular.com/mojo/manual/packages) in the file system.
-Installing a package stores it in the file system.
+Build Mojo packages from projects.
+
+[Magic](https://docs.modular.com/magic/) is a package manager for Mojo projects.
+Build Mojo packages such that they can be published, searched, added, and installed.
 
 **⚠️ Warning 🧪 Experimental Code 🚧 Under Construction**
 
@@ -14,6 +16,8 @@ If `==<version>` is specified, then the specified `<version>` is installed. Othe
 Just `mop` without arguments prints the usage.
 
 ## Setup
+
+Install Magic.
 
 Pick a [release](https://github.com/gerald-scharitzer/mop/releases) and download it, or clone it from the Git repository.
 
@@ -35,6 +39,9 @@ or directories specified as `-I` options for the commands
 [`mojo build`](https://docs.modular.com/mojo/cli/build#-i-path),
 [`mojo run`](https://docs.modular.com/mojo/cli/run#-i-path), and
 [`mojo package`](https://docs.modular.com/mojo/cli/package#-i-path).
+
+Mojo packages are imported from [directories or package files](https://docs.modular.com/mojo/manual/packages) in the file system.
+Installing a package stores it in the file system.
 
 What is the module search order?
 

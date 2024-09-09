@@ -1,5 +1,7 @@
+from .builder import build
 from .index import Index
 from .package import Package
+from .packer import pack
 from .repository import Repository
 from .tools import health
 # TODO module and function with the same name causes error with "module '<module>' is not callable"

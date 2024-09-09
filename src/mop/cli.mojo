@@ -1,9 +1,12 @@
-from mop import health, Index, Repository, VERSION
+from mop import build, health, Index, pack, Repository, VERSION
 
 alias USAGE = """\
 Usage: mop [arguments]
 Arguments:
 
+	b | build
+		Build executables from Magic projects.
+	
 	h | health
 		Check fundamental assumptions like the encoding of ASCII digits and letters.
 	
@@ -11,6 +14,9 @@ Arguments:
 		Installs <package> from the GitHub repository of <user>
 		into the current directory as .mojopkg file.
 		If ==<version> is not specified, then the latest version is installed.
+	
+	p | pack
+		Create Mojo packages from Magic projects.
 	
 	v | version
 		Prints the version of this package.
@@ -35,7 +41,10 @@ fn run(args: VariadicList[StringRef]) raises -> Int:
 		if arg_state == ARG_STATE_COMMAND: # do nothing with the command name
 			arg_state = ARG_STATE_NEW
 		elif arg_state == ARG_STATE_NEW: # new argument sequence
-			if arg == "h" or arg == "health":
+			if arg == "b" or arg == "build":
+				build()
+				arg_state = ARG_STATE_NEW
+			elif arg == "h" or arg == "health":
 				try:
 					health()
 				except e:
@@ -44,6 +53,9 @@ fn run(args: VariadicList[StringRef]) raises -> Int:
 				arg_state = ARG_STATE_NEW
 			elif arg == "i" or arg == "install":
 				arg_state = ARG_STATE_INSTALL
+			elif arg == "p" or arg == "pack":
+				pack()
+				arg_state = ARG_STATE_NEW
 			elif arg == "v" or arg == "version":
 				print(VERSION)
 				arg_state = ARG_STATE_NEW
